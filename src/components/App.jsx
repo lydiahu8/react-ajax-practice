@@ -3,13 +3,30 @@ import React from 'react';
 class App extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      name: '',
+      message: '',
+      response: ''
+    }
   }
+
+  handleNameChange(name) {
+
+  };
+
+  handleMessageChange(message) {
+
+  };
+
+  handleButtonChange(event) {
+
+  };
 
   render () {
 
     return (
       <div>
-        Server Response: {}
+        <div>Server Response: {}</div>
         <form>
           <label>
             Name:
@@ -22,11 +39,8 @@ class App extends React.Component {
           <input type='submit' value='Submit'/>
         </form>
       </div>
-
     );
-
   }
-
 }
 
 export default App;
