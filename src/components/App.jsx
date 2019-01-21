@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor (props) {
@@ -8,17 +9,49 @@ class App extends React.Component {
       message: '',
       response: ''
     }
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleNameChange(name) {
+    this.setState({
+      name: event.target.value
+    });
 
   };
 
   handleMessageChange(message) {
-
+    this.setState({
+      message: event.target.value
+    });
   };
 
-  handleButtonChange(event) {
+  handleSubmit(event) {
+    event.preventDefault();
+    let currentName = this.state.name;
+    let currentMessage = this.state.message;
+
+    var data = {
+      name: currentName,
+      message: currentMessage
+    }
+
+    $.ajax({
+      url: 'http://ec2-13-57-25-101.us-west-1.compute.amazonaws.com:3000/api/hrsf111/greeting',
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function(data) {
+        this.setState({
+          response: data
+        })
+        console.log('SUCCESS!!');
+      }.bind(this),
+      error: function() {
+        console.log('NOT WORKING');
+      }
+    });
 
   };
 
@@ -26,15 +59,15 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>Server Response: {}</div>
-        <form>
+        <div>Server Response: {this.state.response}</div>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Name:
-            <input type='text' name='name'/>
+            <input type='text' value={this.state.name} onChange={this.handleNameChange}/>
           </label>
           <label>
             Message:
-            <input type='text'/>
+            <input type='text' value={this.state.message} onChange={this.handleMessageChange}/>
           </label>
           <input type='submit' value='Submit'/>
         </form>
