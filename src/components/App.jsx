@@ -15,6 +15,7 @@ class App extends React.Component {
   }
 
   handleNameChange(name) {
+    console.log(this)
     this.setState({
       name: event.target.value
     });
@@ -32,7 +33,7 @@ class App extends React.Component {
     let currentName = this.state.name;
     let currentMessage = this.state.message;
 
-    var data = {
+    let data = {
       name: currentName,
       message: currentMessage
     }
@@ -86,3 +87,11 @@ export default App;
 //Try to get something to show up on the DOM first
 //Import react into App.jsx
 //Create a class App and get the Name and message input fields along with the submit button into the DOM
+//Bind 'this' to App, otherwise it will be undefined
+//Create functional methods to change the state for message, name, and submit button
+//Use setState to change the state of the name and message
+//In the handleSubmit method, create a data object that you want to send to the server
+//Use ajax to post to server
+
+
+
