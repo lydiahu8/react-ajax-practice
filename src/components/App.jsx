@@ -14,7 +14,7 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleNameChange(name) {
+  handleNameChange(event) {
     console.log(this)
     this.setState({
       name: event.target.value
@@ -22,7 +22,7 @@ class App extends React.Component {
 
   };
 
-  handleMessageChange(message) {
+  handleMessageChange(event) {
     this.setState({
       message: event.target.value
     });
